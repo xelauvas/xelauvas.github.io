@@ -1,17 +1,15 @@
-// ====== CONFIG (edit these) ======
 const CONFIG = {
   githubUser: "xelauvas",
-  // If your repo names differ, change them here:
   repos: {
     "crypto-pulse": "crypto-pulse",
     "xelas-platform": "xelas-platform",
     "verselens": "verselens",
   },
-  email: "" // e.g. "you@email.com" (optional)
+  email: "",     // set your email here, e.g. "you@email.com"
+  linkedin: ""   // set your LinkedIn url here, e.g. "https://www.linkedin.com/in/..."
 };
 
-// ====== Link wiring ======
-function repoUrl(key) {
+function repoUrl(key){
   const name = CONFIG.repos[key] || key;
   return `https://github.com/${CONFIG.githubUser}/${name}`;
 }
@@ -21,49 +19,49 @@ document.querySelectorAll("[data-repo]").forEach(a => {
   a.href = repoUrl(key);
 });
 
-const emailLink = document.getElementById("emailLink");
-if (CONFIG.email) {
-  emailLink.textContent = CONFIG.email;
-  emailLink.href = `mailto:${CONFIG.email}`;
-} else {
-  emailLink.textContent = "Email (set in script.js)";
-  emailLink.href = "#";
-}
-
 document.getElementById("year").textContent = String(new Date().getFullYear());
 
-// ====== Modal content (positioning) ======
+// Theme toggle
+const themeBtn = document.getElementById("themeBtn");
+const saved = localStorage.getItem("theme");
+if (saved) document.documentElement.setAttribute("data-theme", saved);
+
+themeBtn.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const next = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+});
+
+// Modal
 const MODALS = {
   crypto: {
     title: "crypto-pulse — what it proves",
     body: `
       <ul>
-        <li>Real-time ingestion (WebSocket), filtering, and event-driven processing.</li>
-        <li>Indicator pipeline + risk framing + structured alert output.</li>
-        <li>AI used as a production component: context → decision (WAIT vs setup) → message.</li>
-        <li>Operational hygiene: retries/logging/lifecycle patterns.</li>
-      </ul>
-    `
+        <li><strong>Real-time pipeline</strong>: WebSocket events + REST data fetching.</li>
+        <li><strong>Signal framing</strong>: indicators, entries/stops/targets, risk-aware outputs.</li>
+        <li><strong>AI as production component</strong>: context → WAIT vs setup → message.</li>
+        <li><strong>Operational hygiene</strong>: lifecycle, retries/logging patterns.</li>
+      </ul>`
   },
   xelas: {
     title: "xelas-platform — what it proves",
     body: `
       <ul>
-        <li>Architecture-first thinking: API layer, services, models, core config.</li>
-        <li>Maintainability and extensibility over fast hacks.</li>
-        <li>Comfort with building platforms, not just features.</li>
-      </ul>
-    `
+        <li><strong>Architecture-first</strong>: API layer, services, models, core configuration.</li>
+        <li><strong>Platform thinking</strong>: maintainability + extensibility over quick hacks.</li>
+        <li><strong>Ownership</strong>: structured code organization and system boundaries.</li>
+      </ul>`
   },
   verselens: {
     title: "verselens — what it proves",
     body: `
       <ul>
-        <li>Product UI mindset: structure, navigation, reusable components.</li>
-        <li>Type safety and clean state management patterns.</li>
-        <li>Ability to deliver a UI layer when the system needs it.</li>
-      </ul>
-    `
+        <li><strong>Product UI</strong>: screens, navigation, reusable components.</li>
+        <li><strong>Type safety</strong>: clean typed state patterns.</li>
+        <li><strong>End-to-end capability</strong>: UI layer to support a real system.</li>
+      </ul>`
   }
 };
 
@@ -80,33 +78,42 @@ document.querySelectorAll("[data-modal]").forEach(btn => {
     modal.showModal();
   });
 });
-
 document.getElementById("closeModal").addEventListener("click", () => modal.close());
 modal.addEventListener("click", (e) => {
-  const rect = modal.getBoundingClientRect();
-  const inDialog =
-    rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-    rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
-  if (!inDialog) modal.close();
+  const r = modal.getBoundingClientRect();
+  const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
+  if (!inside) modal.close();
 });
 
-// ====== Theme toggle ======
-const themeBtn = document.getElementById("themeBtn");
-const saved = localStorage.getItem("theme");
-if (saved) document.documentElement.setAttribute("data-theme", saved);
-
-themeBtn.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
-  const next = current === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
+// Contact buttons
+const copyBtn = document.getElementById("copyEmailBtn");
+copyBtn.addEventListener("click", async () => {
+  if (!CONFIG.email) {
+    alert("Set your email in script.js (CONFIG.email).");
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(CONFIG.email);
+    copyBtn.textContent = "Copied ✓";
+    setTimeout(() => (copyBtn.textContent = "Copy email"), 1200);
+  } catch {
+    alert("Copy failed. You can set a mailto link instead.");
+  }
 });
 
-// ====== Reveal on scroll ======
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add("is-visible");
+const linkedinLink = document.getElementById("linkedinLink");
+if (CONFIG.linkedin) {
+  linkedinLink.href = CONFIG.linkedin;
+} else {
+  linkedinLink.href = "#";
+  linkedinLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("Set your LinkedIn URL in script.js (CONFIG.linkedin).");
   });
-}, { threshold: 0.15 });
+}
 
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("is-visible"); });
+}, { threshold: 0.14 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
