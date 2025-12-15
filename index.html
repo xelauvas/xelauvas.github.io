@@ -1,1 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xelauvas — Technical Builder & Operator</title>
+  <meta name="description" content="Technical Builder & Operator — AI-assisted development, backend systems, product mindset." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span class="brand__name">xelauvas</span>
+      </a>
+
+      <nav class="menu" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#stack">Stack</a>
+        <a href="#principles">Principles</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="btn btn--ghost" id="themeBtn" type="button" aria-label="Toggle theme">
+          Theme
+        </button>
+        <a class="btn" id="githubBtn" href="https://github.com/xelauvas" target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="kicker">Technical Builder & Operator</p>
+          <h1 class="title">
+            I build <span class="glow">real systems</span> with AI-assisted workflows.
+          </h1>
+          <p class="subtitle">
+            Backend systems • automation • real-time data • product mindset.
+            Focused on shipping working products under real-world constraints.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#projects">View projects</a>
+            <a class="btn btn--ghost" href="#contact">Contact</a>
+          </div>
+
+          <div class="hero__badges" aria-label="Highlights">
+            <span class="chip">Async Python</span>
+            <span class="chip">APIs & Services</span>
+            <span class="chip">LLM integrations</span>
+            <span class="chip">React Native</span>
+          </div>
+        </div>
+
+        <div class="hero__panel">
+          <div class="panel">
+            <div class="panel__top">
+              <span class="dot dot--red"></span>
+              <span class="dot dot--yellow"></span>
+              <span class="dot dot--green"></span>
+              <span class="panel__title">Now</span>
+            </div>
+            <div class="panel__body">
+              <ul class="list">
+                <li><span class="bullet">→</span> Building a focused portfolio for remote roles</li>
+                <li><span class="bullet">→</span> Strengthening fundamentals: testing, system design, DS&A</li>
+                <li><span class="bullet">→</span> Shipping production-minded prototypes fast</li>
+              </ul>
+              <div class="panel__meta">
+                <span class="meta">UK</span>
+                <span class="meta">AI-assisted builder</span>
+                <span class="meta">Systems-first</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat__num">3</div>
+              <div class="stat__lbl">flagship repos</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">∞</div>
+              <div class="stat__lbl">iteration mindset</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">AI</div>
+              <div class="stat__lbl">as production tool</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section__head">
+          <h2>Selected projects</h2>
+          <p class="muted">
+            Three repos that represent how I think: real-time systems, platform architecture, and product UI.
+          </p>
+        </div>
+
+        <div class="grid">
+          <!-- Crypto Pulse -->
+          <article class="card reveal">
+            <div class="card__top">
+              <div class="card__icon" aria-hidden="true">⚡</div>
+              <div>
+                <h3>crypto-pulse</h3>
+                <p class="muted">Real-time Telegram bot: live events → indicators → AI context → alerts.</p>
+              </div>
+            </div>
+
+            <ul class="tags" aria-label="Key features">
+              <li>WebSockets + REST</li>
+              <li>Async Python</li>
+              <li>Indicators + Risk</li>
+              <li>Groq/LLaMA analysis</li>
+            </ul>
+
+            <p class="card__body">
+              Monitors Binance liquidation stream, fetches OHLCV, computes indicators (EMA/RSI/MACD/ADX/ATR etc.),
+              builds entries/targets/stops, asks LLM for WAIT vs setup, then sends rich HTML alerts to Telegram.
+            </p>
+
+            <div class="card__actions">
+              <a class="btn btn--primary" data-repo="crypto-pulse" href="#" target="_blank" rel="noreferrer">Repository</a>
+              <button class="btn btn--ghost" data-modal="crypto">What it proves</button>
+            </div>
+          </article>
+
+          <!-- xelas-platform -->
+          <article class="card reveal">
+            <div class="card__top">
+              <div class="card__icon" aria-hidden="true">🏗️</div>
+              <div>
+                <h3>xelas-platform</h3>
+                <p class="muted">Modular platform: API, services, models, config, and extensibility.</p>
+              </div>
+            </div>
+
+            <ul class="tags">
+              <li>Python backend</li>
+              <li>Layered architecture</li>
+              <li>Auth + config</li>
+              <li>Monorepo mindset</li>
+            </ul>
+
+            <p class="card__body">
+              A structured backend-oriented platform: routes/API layer, services, data models, core config and database
+              primitives, plus room for NLP tooling. Built for maintainability, not for flashy demos.
+            </p>
+
+            <div class="card__actions">
+              <a class="btn btn--primary" data-repo="xelas-platform" href="#" target="_blank" rel="noreferrer">Repository</a>
+              <button class="btn btn--ghost" data-modal="xelas">What it proves</button>
+            </div>
+          </article>
+
+          <!-- verselens -->
+          <article class="card reveal">
+            <div class="card__top">
+              <div class="card__icon" aria-hidden="true">📱</div>
+              <div>
+                <h3>verselens</h3>
+                <p class="muted">React Native / Expo app with clean structure and product UX.</p>
+              </div>
+            </div>
+
+            <ul class="tags">
+              <li>TypeScript</li>
+              <li>Navigation</li>
+              <li>Context state</li>
+              <li>Styled components</li>
+            </ul>
+
+            <p class="card__body">
+              Mobile interface layer: structured data, screens, navigation, reusable components, a typed context for global state,
+              and a consistent theme. Built like a product, not a toy UI.
+            </p>
+
+            <div class="card__actions">
+              <a class="btn btn--primary" data-repo="verselens" href="#" target="_blank" rel="noreferrer">Repository</a>
+              <button class="btn btn--ghost" data-modal="verselens">What it proves</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section__head">
+          <h2>Stack</h2>
+          <p class="muted">Tools I use to ship systems fast and keep them maintainable.</p>
+        </div>
+
+        <div class="stack">
+          <div class="stack__col reveal">
+            <h3>Backend</h3>
+            <ul class="list list--dense">
+              <li><span class="bullet">→</span> Python (asyncio), aiohttp, websockets</li>
+              <li><span class="bullet">→</span> APIs, services, layered architecture</li>
+              <li><span class="bullet">→</span> Logging, retries, lifecycle management</li>
+            </ul>
+          </div>
+
+          <div class="stack__col reveal">
+            <h3>AI & Data</h3>
+            <ul class="list list--dense">
+              <li><span class="bullet">→</span> LLM integrations (Groq/LLaMA workflows)</li>
+              <li><span class="bullet">→</span> Pandas/Numpy, indicators, context building</li>
+              <li><span class="bullet">→</span> Prompts as product primitives</li>
+            </ul>
+          </div>
+
+          <div class="stack__col reveal">
+            <h3>Product</h3>
+            <ul class="list list--dense">
+              <li><span class="bullet">→</span> React Native / Expo (TypeScript)</li>
+              <li><span class="bullet">→</span> Navigation, components, theming</li>
+              <li><span class="bullet">→</span> UX focused, minimal complexity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="section" id="principles">
+      <div class="container">
+        <div class="section__head">
+          <h2>How I work</h2>
+          <p class="muted">The principles behind the projects.</p>
+        </div>
+
+        <div class="principles">
+          <div class="pill reveal">
+            <h3>Ship first</h3>
+            <p>Working product beats perfect architecture. Iterate with intent.</p>
+          </div>
+          <div class="pill reveal">
+            <h3>Systems thinking</h3>
+            <p>Reliability, lifecycle, observability, and clear boundaries.</p>
+          </div>
+          <div class="pill reveal">
+            <h3>AI as leverage</h3>
+            <p>Use LLMs to accelerate delivery, but keep structure and ownership.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section__head">
+          <h2>Contact</h2>
+          <p class="muted">If you’re hiring for ownership + delivery, I’m open to conversations.</p>
+        </div>
+
+        <div class="contact reveal">
+          <div class="contact__card">
+            <h3>Links</h3>
+            <div class="contact__links">
+              <a class="link" href="https://github.com/xelauvas" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="link" id="emailLink" href="#" rel="noreferrer">Email (add yours in script.js)</a>
+            </div>
+            <p class="muted small">Tip: add LinkedIn later when ready.</p>
+          </div>
+
+          <div class="contact__card">
+            <h3>Availability</h3>
+            <p class="muted">
+              Remote roles • system building • automation • AI integrations.
+            </p>
+            <p class="small muted">
+              This site is hosted on GitHub Pages. No tracking, no noise.
+            </p>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <span class="muted small">© <span id="year"></span> xelauvas</span>
+          <span class="muted small">Built to be scanned in 30 seconds.</span>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <dialog class="modal" id="modal">
+    <div class="modal__inner">
+      <div class="modal__head">
+        <h3 id="modalTitle">Title</h3>
+        <button class="btn btn--ghost" id="closeModal" type="button">Close</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
