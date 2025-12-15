@@ -1,318 +1,1274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>xelauvas — Technical Builder & Operator</title>
-  <meta name="description" content="Technical Builder & Operator. AI-assisted backend systems, automation, and product mindset. Portfolio: crypto-pulse, xelas-platform, verselens." />
-  <meta name="color-scheme" content="dark light" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xelauvas - Software Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --accent: #1a73e8;
+            --accent-hover: #1557b0;
+            --gray-100: #f8f9fa;
+            --gray-200: #e8eaed;
+            --gray-300: #dadce0;
+            --gray-700: #5f6368;
+            --success: #34a853;
+            --warning: #fbbc04;
+            --error: #ea4335;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f0f0f;
+            --text: #e8eaed;
+            --accent: #8ab4f8;
+            --accent-hover: #aecbfa;
+            --gray-100: #1a1a1a;
+            --gray-200: #2a2a2a;
+            --gray-300: #3c4043;
+            --gray-700: #9aa0a6;
+            --success: #81c995;
+            --warning: #fdd663;
+            --error: #f28b82;
+        }
+
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        [data-theme="dark"] .navbar.scrolled {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--gray-300);
+            background: var(--bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .sun-icon {
+            display: block;
+            color: var(--text);
+        }
+
+        .moon-icon {
+            display: none;
+            color: var(--text);
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: block;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            color: var(--text);
+        }
+
+        .hero-title strong {
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .hero-metrics {
+            display: flex;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-top: 0.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(26, 115, 232, 0.3);
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.4);
+            transform: translateY(-1px);
+        }
+
+        [data-theme="dark"] .hero-cta {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        [data-theme="dark"] .hero-cta:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Section Container */
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--gray-700);
+            margin-top: 1rem;
+            max-width: 700px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--gray-100);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+        }
+
+        [data-theme="dark"] .about-highlights {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .highlight-text h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-text p {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        [data-theme="dark"] .project-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-header {
+            padding: 2rem 2rem 1.5rem;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .project-timeline {
+            font-size: 0.75rem;
+            color: var(--text);
+            background: var(--gray-100);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            font-weight: 500;
+        }
+
+        .project-description {
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--gray-100);
+            color: var(--text);
+            border-radius: 12px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+        }
+
+        .tech-badge:hover {
+            background: var(--gray-200);
+            border-color: var(--accent);
+        }
+
+        .project-details {
+            padding: 0 2rem 2rem;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1.5rem;
+        }
+
+        .project-details h4 {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--gray-700);
+        }
+
+        .project-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text);
+        }
+
+        .feature-item::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--gray-100);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .skill-category:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-category-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .skill-name {
+            color: var(--text);
+        }
+
+        .skill-level {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 500;
+            background: var(--gray-100);
+            padding: 0.125rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            margin-top: 3rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 1px var(--gray-200);
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-meta {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-description {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            padding: 100px 2rem;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .contact-description {
+            font-size: 1.125rem;
+            color: var(--gray-700);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            background: var(--bg);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: 1px solid var(--gray-300);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: var(--gray-100);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-100);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer-text {
+            color: var(--gray-700);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .theme-toggle {
+                margin-left: auto;
+            }
+
+            .hero-metrics {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hero-content > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hero-label { animation-delay: 0.1s; }
+        .hero-title { animation-delay: 0.2s; }
+        .hero-description { animation-delay: 0.3s; }
+        .hero-metrics { animation-delay: 0.4s; }
+        .hero-cta { animation-delay: 0.5s; }
+    </style>
 </head>
-
 <body>
-  <a class="skip" href="#content">Skip to content</a>
-
-  <header class="nav">
-    <div class="wrap nav__inner">
-      <a class="brand" href="#top" aria-label="Home">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__name">xelauvas</span>
-      </a>
-
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#projects">Projects</a>
-        <a href="#proof">Proof</a>
-        <a href="#stack">Stack</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="nav__actions">
-        <button class="btn btn--ghost" id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
-        <a class="btn btn--primary" id="githubBtn" href="https://github.com/xelauvas" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="content">
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="wrap hero__grid">
-        <div class="hero__left">
-          <p class="kicker">Technical Builder & Operator</p>
-          <h1 class="h1">
-            I build <span class="grad">real systems</span> with AI-assisted workflows.
-          </h1>
-          <p class="sub">
-            Systems-first backend, automation, real-time pipelines, and product UI when needed.
-            Built under real-world constraints — focused on shipping, not credentials.
-          </p>
-
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#projects">View projects</a>
-            <a class="btn btn--ghost" href="#contact">Contact</a>
-          </div>
-
-          <div class="chips" aria-label="Highlights">
-            <span class="chip">Async Python</span>
-            <span class="chip">WebSockets + APIs</span>
-            <span class="chip">LLM integrations</span>
-            <span class="chip">Product mindset</span>
-          </div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">xelauvas</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg class="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
+    </nav>
 
-        <div class="hero__right">
-          <div class="panel reveal">
-            <div class="panel__bar">
-              <span class="dot dot--r"></span><span class="dot dot--y"></span><span class="dot dot--g"></span>
-              <span class="panel__title">Now</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">SOFTWARE ENGINEER</div>
+            <h1 class="hero-title">Building complex systems with <strong>AI-augmented development</strong></h1>
+            <p class="hero-description">
+                Full-stack engineer specializing in rapid prototyping and production-ready applications. I leverage cutting-edge AI tools to deliver enterprise-grade solutions in a fraction of traditional development time.
+            </p>
+            <div class="hero-metrics">
+                <div class="metric">
+                    <div class="metric-value">4+</div>
+                    <div class="metric-label">Production Applications</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">10x</div>
+                    <div class="metric-label">Development Speed</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Remote Experience</div>
+                </div>
             </div>
-            <div class="panel__body">
-              <ul class="bullets">
-                <li><span class="arrow">→</span> Building a focused portfolio for remote roles</li>
-                <li><span class="arrow">→</span> Strengthening fundamentals: testing, system design, DS&A</li>
-                <li><span class="arrow">→</span> Shipping production-minded projects fast (AI as leverage)</li>
-              </ul>
-
-              <div class="meta">
-                <span class="pill">UK</span>
-                <span class="pill">Systems-first</span>
-                <span class="pill">AI-assisted</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="metrics">
-            <div class="metric reveal">
-              <div class="metric__num">3</div>
-              <div class="metric__lbl">flagship projects</div>
-            </div>
-            <div class="metric reveal">
-              <div class="metric__num">RT</div>
-              <div class="metric__lbl">real-time pipelines</div>
-            </div>
-            <div class="metric reveal">
-              <div class="metric__num">AI</div>
-              <div class="metric__lbl">production tool</div>
-            </div>
-          </div>
+            <a href="https://github.com/xelauvas" target="_blank" class="hero-cta">
+                View GitHub Profile →
+            </a>
         </div>
-      </div>
-
-      <div class="bg" aria-hidden="true"></div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="section-header">
+            <div class="section-label">About</div>
+            <h2 class="section-title">Modern approach to software engineering</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I'm a self-taught software engineer with a unique approach to building production-grade applications. By leveraging AI tools like Claude, ChatGPT, and DeepSeek as force multipliers, I've developed the ability to architect, build, and ship complex full-stack systems at exceptional speed without compromising quality.
+                </p>
+                <p>
+                    My background includes building a feature-complete mobile application in under 30 days and a comprehensive backend platform in 2-3 months—all while managing a full-time role in hospitality. This demonstrates not only technical capability but also exceptional time management, learning agility, and the ability to deliver results under pressure.
+                </p>
+                <p>
+                    I'm currently focused on mastering data structures, algorithms, and system design to complement my practical experience and prepare for senior engineering roles at top-tier technology companies.
+                </p>
+            </div>
+            <div class="about-highlights">
+                <div class="highlight-item">
+                    <div class="highlight-icon">🚀</div>
+                    <div class="highlight-text">
+                        <h3>Rapid Execution</h3>
+                        <p>Ship MVPs in weeks, not months</p>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🏗️</div>
+                    <div class="highlight-text">
+                        <h3>System Architecture</h3>
+                        <p>Design scalable, maintainable solutions</p>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🤖</div>
+                    <div class="highlight-text">
+                        <h3>AI Integration</h3>
+                        <p>Leverage LLMs for 10x productivity</p>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">📚</div>
+                    <div class="highlight-text">
+                        <h3>Continuous Learning</h3>
+                        <p>Active roadmap for CS fundamentals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
     <section class="section" id="projects">
-      <div class="wrap">
-        <div class="head">
-          <h2 class="h2">Selected projects</h2>
-          <p class="muted">Designed to show how I think: real-time systems, platform architecture, and product UI.</p>
+        <div class="section-header">
+            <div class="section-label">Projects</div>
+            <h2 class="section-title">Production-grade applications</h2>
+            <p class="section-description">
+                End-to-end ownership of complex systems from concept to deployment
+            </p>
         </div>
-
-        <div class="grid">
-          <article class="card reveal">
-            <div class="card__top">
-              <div class="icon" aria-hidden="true">⚡</div>
-              <div>
-                <h3 class="h3">crypto-pulse</h3>
-                <p class="muted small">Async bot: live events → indicators → AI context → Telegram alerts.</p>
-              </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-meta">
+                        <h3 class="project-title">Verselens</h3>
+                        <span class="project-timeline">~1 month</span>
+                    </div>
+                    <p class="project-description">
+                        Cross-platform mobile application for package version management built with React Native and Expo. Features advanced animations, gesture controls, and sophisticated state management with Context API.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-badge">React Native</span>
+                        <span class="tech-badge">TypeScript</span>
+                        <span class="tech-badge">Expo</span>
+                        <span class="tech-badge">Context API</span>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Custom animation system with gesture handling</div>
+                        <div class="feature-item">Scalable component architecture</div>
+                        <div class="feature-item">Type-safe navigation with React Navigation</div>
+                        <div class="feature-item">Optimized performance for mobile devices</div>
+                    </div>
+                </div>
             </div>
 
-            <ul class="tags" aria-label="Key features">
-              <li>Binance WS + REST</li>
-              <li>Indicators + targets</li>
-              <li>Groq/LLaMA decision</li>
-              <li>Prod-style logging</li>
-            </ul>
-
-            <p class="body">
-              Monitors liquidation stream, fetches OHLCV, computes indicators (EMA/RSI/MACD/ADX/ATR etc.),
-              frames entries/stops/targets, then asks an LLM for “WAIT vs setup” and sends rich Telegram alerts.
-            </p>
-
-            <div class="actions">
-              <a class="btn btn--primary" data-repo="crypto-pulse" href="#" target="_blank" rel="noreferrer">Repo</a>
-              <button class="btn btn--ghost" data-modal="crypto" type="button">What it proves</button>
-            </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card__top">
-              <div class="icon" aria-hidden="true">🏗️</div>
-              <div>
-                <h3 class="h3">xelas-platform</h3>
-                <p class="muted small">Platform mindset: API, services, models, core config.</p>
-              </div>
-            </div>
-
-            <ul class="tags">
-              <li>Layered backend</li>
-              <li>Services + models</li>
-              <li>Auth/config</li>
-              <li>Monorepo structure</li>
-            </ul>
-
-            <p class="body">
-              Modular backend-oriented platform with clear separation (API/routes, services, models, core config/database).
-              Built for maintainability and extensibility rather than flashy demos.
-            </p>
-
-            <div class="actions">
-              <a class="btn btn--primary" data-repo="xelas-platform" href="#" target="_blank" rel="noreferrer">Repo</a>
-              <button class="btn btn--ghost" data-modal="xelas" type="button">What it proves</button>
-            </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="card__top">
-              <div class="icon" aria-hidden="true">📱</div>
-              <div>
-                <h3 class="h3">verselens</h3>
-                <p class="muted small">Product UI layer: clean structure, navigation, typed state.</p>
-              </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-meta">
+                        <h3 class="project-title">Xelas.io</h3>
+                        <span class="project-timeline">2-3 months</span>
+                    </div>
+                    <p class="project-description">
+                        Full-stack monorepo platform with Python/Flask backend, Firebase integration, and multi-provider OAuth authentication. Implements clean architecture with separated API, service, and data layers.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Firebase</span>
+                        <span class="tech-badge">OAuth</span>
+                        <span class="tech-badge">NLTK</span>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Multi-layered architecture (API/Services/Models)</div>
+                        <div class="feature-item">OAuth integration (Google, Microsoft, Discord)</div>
+                        <div class="feature-item">Firebase Auth and Firestore data layer</div>
+                        <div class="feature-item">NLP capabilities for text processing</div>
+                    </div>
+                </div>
             </div>
 
-            <ul class="tags">
-              <li>React Native / Expo</li>
-              <li>TypeScript</li>
-              <li>Navigation</li>
-              <li>Context state</li>
-            </ul>
-
-            <p class="body">
-              Mobile app built as a real UI layer: screens, navigation, reusable components, typed Context for global state,
-              and consistent theming.
-            </p>
-
-            <div class="actions">
-              <a class="btn btn--primary" data-repo="verselens" href="#" target="_blank" rel="noreferrer">Repo</a>
-              <button class="btn btn--ghost" data-modal="verselens" type="button">What it proves</button>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-meta">
+                        <h3 class="project-title">Crypto Pulse</h3>
+                        <span class="project-timeline">Trading Bot</span>
+                    </div>
+                    <p class="project-description">
+                        Automated cryptocurrency trading system with real-time Binance WebSocket integration, AI-powered market analysis using Groq/LLaMA, and comprehensive technical indicators for informed trading decisions.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">asyncio</span>
+                        <span class="tech-badge">Binance API</span>
+                        <span class="tech-badge">LLaMA</span>
+                        <span class="tech-badge">Telegram</span>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Real-time WebSocket liquidation monitoring</div>
+                        <div class="feature-item">Technical analysis (RSI, MACD, ADX, ATR, VWAP)</div>
+                        <div class="feature-item">AI-powered trade context analysis with LLaMA</div>
+                        <div class="feature-item">Automated alert system via Telegram</div>
+                    </div>
+                </div>
             </div>
-          </article>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-meta">
+                        <h3 class="project-title">Delivery System</h3>
+                        <span class="project-timeline">Ops Platform</span>
+                    </div>
+                    <p class="project-description">
+                        Complete order management and tracking platform with admin dashboard. Handles order intake, real-time status updates, and comprehensive logging for operational efficiency.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Order intake and processing pipeline</div>
+                        <div class="feature-item">Real-time tracking interface</div>
+                        <div class="feature-item">Admin dashboard with analytics</div>
+                        <div class="feature-item">Input validation and security logging</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- PROOF -->
-    <section class="section" id="proof">
-      <div class="wrap">
-        <div class="head">
-          <h2 class="h2">Proof of capability</h2>
-          <p class="muted">
-            Employers hire for outcomes. Here’s the signal behind the projects.
-          </p>
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="section-header">
+            <div class="section-label">Technical Skills</div>
+            <h2 class="section-title">Full-stack expertise</h2>
         </div>
-
-        <div class="proof">
-          <div class="proof__item reveal">
-            <h3 class="h3">Systems thinking</h3>
-            <p class="muted">
-              Not just “features”. I build pipelines with lifecycle, retries/logging patterns, and clear boundaries.
-            </p>
-          </div>
-
-          <div class="proof__item reveal">
-            <h3 class="h3">AI as leverage</h3>
-            <p class="muted">
-              LLMs used as a production component (context → decision → output), while maintaining ownership of architecture.
-            </p>
-          </div>
-
-          <div class="proof__item reveal">
-            <h3 class="h3">Shipping under constraints</h3>
-            <p class="muted">
-              I can deliver end-to-end systems with limited time and real-world responsibilities — execution-first.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STACK -->
-    <section class="section" id="stack">
-      <div class="wrap">
-        <div class="head">
-          <h2 class="h2">Stack</h2>
-          <p class="muted">Tools chosen for delivery speed + maintainability.</p>
-        </div>
-
-        <div class="stack">
-          <div class="stack__col reveal">
-            <h3 class="h3">Backend</h3>
-            <ul class="bullets dense">
-              <li><span class="arrow">→</span> Python (asyncio), aiohttp, websockets</li>
-              <li><span class="arrow">→</span> APIs, services, layered architecture</li>
-              <li><span class="arrow">→</span> Logging, retries, lifecycle hygiene</li>
-            </ul>
-          </div>
-
-          <div class="stack__col reveal">
-            <h3 class="h3">AI & Data</h3>
-            <ul class="bullets dense">
-              <li><span class="arrow">→</span> LLM workflows (Groq/LLaMA style integration)</li>
-              <li><span class="arrow">→</span> Pandas/Numpy, indicator pipelines</li>
-              <li><span class="arrow">→</span> Context building + structured outputs</li>
-            </ul>
-          </div>
-
-          <div class="stack__col reveal">
-            <h3 class="h3">Product</h3>
-            <ul class="bullets dense">
-              <li><span class="arrow">→</span> React Native / Expo (TypeScript)</li>
-              <li><span class="arrow">→</span> Navigation, components, theming</li>
-              <li><span class="arrow">→</span> UX clarity over complexity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="wrap">
-        <div class="head">
-          <h2 class="h2">Contact</h2>
-          <p class="muted">If you’re hiring for ownership + delivery, I’m open to conversations.</p>
-        </div>
-
-        <div class="contact">
-          <div class="contact__card reveal">
-            <h3 class="h3">Links</h3>
-            <div class="links">
-              <a class="link" href="https://github.com/xelauvas" target="_blank" rel="noreferrer">GitHub</a>
-              <button class="link" id="copyEmailBtn" type="button">Copy email</button>
-              <a class="link" id="linkedinLink" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3 class="skill-category-title">Frontend Development</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">React Native + Expo</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">TypeScript</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">React Hooks & Context</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Styled Components</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Animation & Gestures</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                </div>
             </div>
-            <p class="muted small">Edit email/LinkedIn in <code>script.js</code>.</p>
-          </div>
 
-          <div class="contact__card reveal">
-            <h3 class="h3">Availability</h3>
-            <p class="muted">Remote roles • backend systems • automation • AI integrations.</p>
-            <p class="muted small">No tracking. Fast. Built for scanning.</p>
-          </div>
+            <div class="skill-category">
+                <h3 class="skill-category-title">Backend Development</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Python + Flask</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">RESTful API Design</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">asyncio & WebSockets</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">OAuth Integration</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">PHP</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">Data & Infrastructure</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Firebase (Auth/Firestore)</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">MySQL</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Git & Version Control</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">API Integration</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">AI & Machine Learning</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">LLM Integration</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Prompt Engineering</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">NLTK & NLP</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Data Analysis (pandas)</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">Tools & Practices</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">AI-Augmented Development</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Rapid Prototyping</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">System Architecture</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Code Review</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">Currently Mastering</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Data Structures & Algorithms</span>
+                        <span class="skill-level">Learning</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">System Design Patterns</span>
+                        <span class="skill-level">Learning</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Testing (Pytest, RTL)</span>
+                        <span class="skill-level">Learning</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Distributed Systems</span>
+                        <span class="skill-level">Learning</span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <footer class="footer">
-          <span class="muted small">© <span id="year"></span> xelauvas</span>
-          <span class="muted small">Built to be understood fast.</span>
-        </footer>
-      </div>
     </section>
-  </main>
 
-  <!-- MODAL -->
-  <dialog class="modal" id="modal">
-    <div class="modal__inner">
-      <div class="modal__head">
-        <h3 class="h3" id="modalTitle">Title</h3>
-        <button class="btn btn--ghost" id="closeModal" type="button">Close</button>
-      </div>
-      <div class="modal__body" id="modalBody"></div>
-    </div>
-  </dialog>
+    <!-- Experience Timeline -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">Approach</div>
+            <h2 class="section-title">Development philosophy</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-title">AI-Augmented Development</div>
+                <div class="timeline-meta">Modern Engineering Practice</div>
+                <div class="timeline-description">
+                    Leveraging Claude, ChatGPT, Groq, and DeepSeek as sophisticated development tools to accelerate the software development lifecycle. This approach enables rapid prototyping, efficient debugging, and the ability to explore multiple architectural solutions quickly while maintaining code quality and best practices.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-title">Product-First Mindset</div>
+                <div class="timeline-meta">End-to-End Ownership</div>
+                <div class="timeline-description">
+                    Taking full ownership from concept through deployment. Focus on delivering functional, production-ready applications that solve real problems rather than getting caught in endless planning cycles. Ship early, iterate based on feedback, and continuously improve.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-title">Continuous Learning</div>
+                <div class="timeline-meta">Growth Trajectory</div>
+                <div class="timeline-description">
+                    Actively working through a structured roadmap covering data structures, algorithms, and system design. Committed to bridging practical experience with computer science fundamentals to excel in technical interviews and architectural discussions at senior engineering levels.
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2 class="contact-title">Let's build something impactful</h2>
+            <p class="contact-description">
+                I'm actively seeking remote software engineering opportunities at innovative technology companies. If you're looking for an engineer who can deliver production-ready systems quickly without compromising quality, let's connect.
+            </p>
+            <div class="contact-buttons">
+                <a href="https://github.com/xelauvas" target="_blank" class="btn-primary">
+                    View GitHub Profile
+                </a>
+                <a href="mailto:contact@xelauvas.dev" class="btn-secondary">
+                    Get in Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2024 Xelauvas. Built with modern web technologies.</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe project cards and skill categories
+        document.querySelectorAll('.project-card, .skill-category, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add active state to nav links based on scroll position
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.fontWeight = '500';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.fontWeight = '600';
+                }
+            });
+        });
+
+        console.log('%c[Portfolio Loaded]', 'color: #1a73e8; font-weight: bold; font-size: 14px;');
+        console.log('%cxelauvas - Software Engineer', 'color: #5f6368; font-size: 12px;');
+    </script>
 </body>
 </html>
