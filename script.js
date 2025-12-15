@@ -1,119 +1,89 @@
-const CONFIG = {
-  githubUser: "xelauvas",
-  repos: {
-    "crypto-pulse": "crypto-pulse",
-    "xelas-platform": "xelas-platform",
-    "verselens": "verselens",
-  },
-  email: "",     // set your email here, e.g. "you@email.com"
-  linkedin: ""   // set your LinkedIn url here, e.g. "https://www.linkedin.com/in/..."
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+});
+
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offset = 80;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
-function repoUrl(key){
-  const name = CONFIG.repos[key] || key;
-  return `https://github.com/${CONFIG.githubUser}/${name}`;
-}
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, observerOptions);
 
-document.querySelectorAll("[data-repo]").forEach(a => {
-  const key = a.getAttribute("data-repo");
-  a.href = repoUrl(key);
+// Observe project cards and skill categories
+document.querySelectorAll('.project-card, .skill-category, .timeline-item').forEach(el => {
+    observer.observe(el);
 });
 
-document.getElementById("year").textContent = String(new Date().getFullYear());
+// Add active state to nav links based on scroll position
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
 
-// Theme toggle
-const themeBtn = document.getElementById("themeBtn");
-const saved = localStorage.getItem("theme");
-if (saved) document.documentElement.setAttribute("data-theme", saved);
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
 
-themeBtn.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
-  const next = current === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
+    navLinks.forEach(link => {
+        link.style.fontWeight = '500';
+        if (link.getAttribute('href') === `#${current}`) {
+            link.style.fontWeight = '600';
+        }
+    });
 });
 
-// Modal
-const MODALS = {
-  crypto: {
-    title: "crypto-pulse — what it proves",
-    body: `
-      <ul>
-        <li><strong>Real-time pipeline</strong>: WebSocket events + REST data fetching.</li>
-        <li><strong>Signal framing</strong>: indicators, entries/stops/targets, risk-aware outputs.</li>
-        <li><strong>AI as production component</strong>: context → WAIT vs setup → message.</li>
-        <li><strong>Operational hygiene</strong>: lifecycle, retries/logging patterns.</li>
-      </ul>`
-  },
-  xelas: {
-    title: "xelas-platform — what it proves",
-    body: `
-      <ul>
-        <li><strong>Architecture-first</strong>: API layer, services, models, core configuration.</li>
-        <li><strong>Platform thinking</strong>: maintainability + extensibility over quick hacks.</li>
-        <li><strong>Ownership</strong>: structured code organization and system boundaries.</li>
-      </ul>`
-  },
-  verselens: {
-    title: "verselens — what it proves",
-    body: `
-      <ul>
-        <li><strong>Product UI</strong>: screens, navigation, reusable components.</li>
-        <li><strong>Type safety</strong>: clean typed state patterns.</li>
-        <li><strong>End-to-end capability</strong>: UI layer to support a real system.</li>
-      </ul>`
-  }
-};
-
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
-document.querySelectorAll("[data-modal]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const key = btn.getAttribute("data-modal");
-    const m = MODALS[key];
-    if (!m) return;
-    modalTitle.textContent = m.title;
-    modalBody.innerHTML = m.body;
-    modal.showModal();
-  });
-});
-document.getElementById("closeModal").addEventListener("click", () => modal.close());
-modal.addEventListener("click", (e) => {
-  const r = modal.getBoundingClientRect();
-  const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
-  if (!inside) modal.close();
-});
-
-// Contact buttons
-const copyBtn = document.getElementById("copyEmailBtn");
-copyBtn.addEventListener("click", async () => {
-  if (!CONFIG.email) {
-    alert("Set your email in script.js (CONFIG.email).");
-    return;
-  }
-  try {
-    await navigator.clipboard.writeText(CONFIG.email);
-    copyBtn.textContent = "Copied ✓";
-    setTimeout(() => (copyBtn.textContent = "Copy email"), 1200);
-  } catch {
-    alert("Copy failed. You can set a mailto link instead.");
-  }
-});
-
-const linkedinLink = document.getElementById("linkedinLink");
-if (CONFIG.linkedin) {
-  linkedinLink.href = CONFIG.linkedin;
-} else {
-  linkedinLink.href = "#";
-  linkedinLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    alert("Set your LinkedIn URL in script.js (CONFIG.linkedin).");
-  });
-}
-
-// Reveal on scroll
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("is-visible"); });
-}, { threshold: 0.14 });
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
