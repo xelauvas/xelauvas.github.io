@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Xelauvas - AI-Augmented Full-Stack Engineer specializing in rapid prototyping and production-ready systems">
     <meta name="author" content="Xelauvas">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
     <title>Xelauvas - AI-Augmented Full-Stack Engineer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,12 +13,18 @@
 
 <!-- Navigation -->
 <nav class="navbar" id="navbar">
-    <div class="nav-container">
-        <div class="logo">xelauvas.dev</div>
-        <div class="nav-right">
+        <div class="nav-container">
+            <a class="logo" href="https://xelauvas.dev" target="_blank" rel="noopener noreferrer">xelauvas.dev</a>
+            <div class="nav-right">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -63,7 +70,7 @@
             </div>
         </div>
 
-        <a href="https://github.com/xelauvas" target="_blank" class="hero-cta">
+        <a href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer" class="hero-cta">
             View GitHub Profile →
         </a>
     </div>
@@ -156,16 +163,19 @@
                     <span class="tech-badge">Context API</span>
                 </div>
             </div>
-            <div class="project-details">
-                <h4>Key Implementations</h4>
-                <div class="project-features">
-                    <div class="feature-item">Custom animation and gesture system</div>
-                    <div class="feature-item">Scalable component architecture</div>
-                    <div class="feature-item">Type-safe navigation</div>
-                    <div class="feature-item">Mobile performance optimization</div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Custom animation and gesture system</div>
+                        <div class="feature-item">Scalable component architecture</div>
+                        <div class="feature-item">Type-safe navigation</div>
+                        <div class="feature-item">Mobile performance optimization</div>
+                    </div>
+                    <div class="project-actions">
+                        <a class="project-link" href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer">View Repo</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
         <div class="project-card">
             <div class="project-header">
@@ -185,16 +195,19 @@
                     <span class="tech-badge">NLP</span>
                 </div>
             </div>
-            <div class="project-details">
-                <h4>Key Implementations</h4>
-                <div class="project-features">
-                    <div class="feature-item">Layered API / service architecture</div>
-                    <div class="feature-item">OAuth (Google, Microsoft, Discord)</div>
-                    <div class="feature-item">Firestore data layer</div>
-                    <div class="feature-item">Text processing & NLP features</div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Layered API / service architecture</div>
+                        <div class="feature-item">OAuth (Google, Microsoft, Discord)</div>
+                        <div class="feature-item">Firestore data layer</div>
+                        <div class="feature-item">Text processing & NLP features</div>
+                    </div>
+                    <div class="project-actions">
+                        <a class="project-link" href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer">View Repo</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
         <div class="project-card">
             <div class="project-header">
@@ -214,16 +227,19 @@
                     <span class="tech-badge">Telegram</span>
                 </div>
             </div>
-            <div class="project-details">
-                <h4>Key Implementations</h4>
-                <div class="project-features">
-                    <div class="feature-item">Real-time WebSocket monitoring</div>
-                    <div class="feature-item">Technical indicators (RSI, MACD, VWAP)</div>
-                    <div class="feature-item">AI trade context analysis</div>
-                    <div class="feature-item">Automated notifications</div>
+                <div class="project-details">
+                    <h4>Key Implementations</h4>
+                    <div class="project-features">
+                        <div class="feature-item">Real-time WebSocket monitoring</div>
+                        <div class="feature-item">Technical indicators (RSI, MACD, VWAP)</div>
+                        <div class="feature-item">AI trade context analysis</div>
+                        <div class="feature-item">Automated notifications</div>
+                    </div>
+                    <div class="project-actions">
+                        <a class="project-link" href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer">View Repo</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
         <div class="project-card">
             <div class="project-header">
@@ -249,9 +265,48 @@
                     <div class="feature-item">Admin analytics dashboard</div>
                     <div class="feature-item">Validation & security logging</div>
                 </div>
+                <div class="project-actions">
+                    <a class="project-link" href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer">View Repo</a>
+                </div>
             </div>
         </div>
 
+    </div>
+</section>
+
+<!-- Experience -->
+<section class="section experience" id="experience">
+    <div class="section-header">
+        <div class="section-label">Experience</div>
+        <h2 class="section-title">Recent work highlights</h2>
+        <p class="section-description">Hands-on delivery and ownership across platforms and teams.</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3 class="timeline-title">AI-Augmented Full-Stack Engineer (Freelance)</h3>
+            <div class="timeline-meta">2023 — Present · Remote</div>
+            <p class="timeline-description">
+                Partner with founders to validate and ship MVPs rapidly using AI-accelerated workflows,
+                delivering production-ready mobile apps, APIs, and automation.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <h3 class="timeline-title">Mobile Platform Lead — VerseLens</h3>
+            <div class="timeline-meta">2023 · React Native / Expo</div>
+            <p class="timeline-description">
+                Built cross-platform foundation with advanced gestures and animations,
+                standardized component patterns, and performance profiling for smooth UX.
+            </p>
+        </div>
+        <div class="timeline-item">
+            <h3 class="timeline-title">Full-Stack Engineer — Xelas.io</h3>
+            <div class="timeline-meta">2022 · Flask / Firebase</div>
+            <p class="timeline-description">
+                Implemented layered services, OAuth integrations, and Firestore data pipelines;
+                shipped user onboarding and NLP-driven features under tight timelines.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -312,7 +367,7 @@
             If you need someone who can move fast and own systems end-to-end, let’s connect.
         </p>
         <div class="contact-buttons">
-            <a href="https://github.com/xelauvas" target="_blank" class="btn-primary">GitHub</a>
+            <a href="https://github.com/xelauvas" target="_blank" rel="noopener noreferrer" class="btn-primary">GitHub</a>
             <a href="mailto:contact@xelauvas.dev" class="btn-secondary">Get in Touch</a>
         </div>
     </div>

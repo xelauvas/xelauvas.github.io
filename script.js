@@ -1,17 +1,36 @@
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
+const themeMeta = document.getElementById('theme-color');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const savedTheme = localStorage.getItem('theme');
+const initialTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-html.setAttribute('data-theme', currentTheme);
+const applyTheme = (theme, persist = true) => {
+    html.setAttribute('data-theme', theme);
+    themeToggle.setAttribute('aria-pressed', theme === 'dark');
+    if (themeMeta) {
+        themeMeta.setAttribute('content', theme === 'dark' ? '#0f0f0f' : '#ffffff');
+    }
+    if (persist) {
+        localStorage.setItem('theme', theme);
+    }
+};
+
+applyTheme(initialTheme, Boolean(savedTheme));
+
+if (!savedTheme) {
+    prefersDark.addEventListener('change', (e) => {
+        applyTheme(e.matches ? 'dark' : 'light', false);
+    });
+}
 
 themeToggle.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
 });
 
 // Navbar scroll effect
@@ -30,6 +49,35 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+// Mobile navigation
+const menuToggle = document.getElementById('menuToggle');
+const navList = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    const isOpen = navList.classList.toggle('open');
+    menuToggle.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+});
+
+const closeMenu = () => {
+    navList.classList.remove('open');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+};
+
+document.addEventListener('click', (event) => {
+    if (!navList.classList.contains('open')) return;
+    if (!navList.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeMenu();
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navList.classList.contains('open')) {
+        closeMenu();
+    }
+});
+
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -40,8 +88,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({
                 top: targetPosition,
-                behavior: 'smooth'
+                behavior: reduceMotion ? 'auto' : 'smooth'
             });
+        }
+
+        if (navList.classList.contains('open')) {
+            closeMenu();
         }
     });
 });
@@ -61,7 +113,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe project cards and skill categories
-document.querySelectorAll('.project-card, .skill-category, .timeline-item').forEach(el => {
+document.querySelectorAll('.project-card, .skill-category').forEach(el => {
     observer.observe(el);
 });
 
@@ -80,10 +132,14 @@ window.addEventListener('scroll', () => {
     });
 
     navLinks.forEach(link => {
-        link.style.fontWeight = '500';
-        if (link.getAttribute('href') === `#${current}`) {
-            link.style.fontWeight = '600';
+        const isActive = link.getAttribute('href') === `#${current}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
         }
     });
 });
 
+window.dispatchEvent(new Event('scroll'));
