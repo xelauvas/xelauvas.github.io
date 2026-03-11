@@ -113,7 +113,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe project cards and skill categories
-document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+document.querySelectorAll('.project-card, .skill-category, .timeline-item').forEach(el => {
     observer.observe(el);
 });
 

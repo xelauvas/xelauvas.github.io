@@ -568,7 +568,7 @@ body {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -773,6 +773,10 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .project-card:nth-child(5) {
+        grid-column: auto;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
     }
@@ -813,6 +817,11 @@ body {
         flex-wrap: wrap;
         gap: 2rem;
     }
+}
+
+/* 5th project card spans full width */
+.project-card:nth-child(5) {
+    grid-column: 1 / -1;
 }
 
 /* Animations */
